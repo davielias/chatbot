@@ -6,9 +6,9 @@ ChatBot.SERVER_PATH = "http://localhost:7000";
 ChatBot.DEFAULT_ANIMATION = "waiting";
 //The animation timeout is used to cut the current running animations when a new animations starts
 ChatBot.animationTimeout;
-//Holds the speech synthesis configuration like language, pich and rate
+//Holds the speech synthesis configuration like language, pitch and rate
 ChatBot.speechConfig;
-//Will be set to false automatically whan the browser does not support speech synthesis
+//Will be set to false automatically when the browser does not support speech synthesis
 //Or when the user clicks the mute button
 ChatBot.speechEnabled = true;
 
