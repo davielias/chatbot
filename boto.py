@@ -11,7 +11,8 @@ isItJC = ["JOHN", "CENA"]
 isThereADog = ["dog", "dogs", "shiba", "inu", "greyhound", "corgi", "doge", "boxer", "retriever",]
 isThereAFly = ["jump", "fly", "flight", "jump", "hops", "hop", "high", "airplane", "heights", "takeoff"]
 isThereAJoke = ["tell me a joke", "make me laugh", "tell me a funny"]
-
+shouldILaugh = ["give me money", "make me rich", "find me a wife",
+"find me a husband"]
 
 @route('/', method='GET')
 def index():
@@ -67,7 +68,7 @@ def checkJoke(m):
     smallJoke = [item.lower() for item in isThereAJoke]
     # listLower = [item.lower() for item in l]
     messageLower = m.lower()
-    if any(x in messageLower for x in smallJoke):
+    if any(x in messageLower for x in smallLaugh):
         return True
     return False
 def handleJoke():
@@ -79,6 +80,19 @@ def handleJoke():
                 "Thieves had broken into my house and stolen everything except my soap, shower gel, towels and deodorant. Dirty Bastards."]
     i = randint(0,5)
     return json.dumps({"animation": "giggling", "msg": jokeList[i]})
+
+def checkLaugh(m):
+    smallLaugh = [item.lower() for item in shouldILaugh]
+    messageLower = m.lower()
+    if any(x in messageLower for x in smallJoke):
+        return True
+    return False
+def handleLaugh():
+    reactionList = ["What did you just ask?!", "You must be joking!",
+                    "Ha! Fat chance!", "Yeah, let me just check my back pocket..."]
+    i = randint(0,3)
+    return json.dumps({"animation": "laughing", "msg": reactionList[i]})
+
 @route("/chat", method='POST')
 def chat():
     user_message = request.POST.get('msg')
@@ -95,6 +109,8 @@ def chat():
         return handleFly()
     elif checkJoke(user_message):
         return handleJoke()
+    elif checkLaugh(user_message):
+        return handleLaugh()
     return json.dumps({"animation": "inlove", "msg": user_message})
 
 
